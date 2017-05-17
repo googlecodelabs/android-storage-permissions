@@ -1,0 +1,35 @@
+<!--
+  Copyright 2017 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<resources>
+    <string name="app_name">Data Privacy</string>
+    <string name="title_activity_image_viewer">Image Viewer</string>
+    <string name="action_settings">Settings</string>
+    <string name="import_image">Import Image</string>
+    <string name="selected_image">selected image</string>
+    <string name="share">Share</string>
+    <string name="delete">Delete</string>
+    <string name="external_storage_rationale">This app requires reading storage from external
+        directories in order to access images from other sources.</string>
+    <string name="images_header">Welcome to the data privacy codelab.\nThis application stores
+        images \'securely\'. Take a photo or import an image to store it within the app.</string>
+    <string name="empty_text">No images saved yet.\nTake a photo or import an image.</string>
+    <string name="import_images_not_available">No images available for import.</string>
+    <string name="external_storage_permission_required">External storage access is need to store images.</string>
+    <string name="missing_permissions">Missing Permissions</string>
+    <string name="request">Request</string>
+    <string name="no_image_icon">No image icon</string>
+</resources>
