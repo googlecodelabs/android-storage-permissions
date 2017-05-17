@@ -63,6 +63,12 @@ public class ImageViewerActivity extends AppCompatActivity implements ImageShare
      */
     @Override
     public void shareImage(String path) {
-        Toast.makeText(this, "TODO: implement sharing.", Toast.LENGTH_SHORT).show();
-    }
+        Toast.makeText(this, "Sharing: " + path, Toast.LENGTH_SHORT).show();
+        Uri contentUri = FileProvider.getUriForFile(this, "com.google.samples.dataprivacy.FileProvider", new File(path));
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setDataAndType(contentUri, "image/png");
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(intent);    }
 }
