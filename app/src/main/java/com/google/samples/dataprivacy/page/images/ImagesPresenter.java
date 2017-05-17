@@ -39,7 +39,7 @@ public class ImagesPresenter implements ImagesContract.Presenter {
 
     @Override
     public void start() {
-        mView.requestPermissions();
+        showImages();
     }
 
     private void showImages() {

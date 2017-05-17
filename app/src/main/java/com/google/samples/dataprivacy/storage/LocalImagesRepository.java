@@ -43,8 +43,8 @@ public class LocalImagesRepository implements ImagesRepository {
     private File mStorage;
 
     public LocalImagesRepository(Context context) {
-        File externalStorage = Environment.getExternalStorageDirectory();
-        mStorage = new File(externalStorage, PATH);
+        File internalStorage = context.getFilesDir();
+        mStorage = new File(internalStorage, PATH);
 
         if (!mStorage.exists()) {
             if (!mStorage.mkdirs()) {
