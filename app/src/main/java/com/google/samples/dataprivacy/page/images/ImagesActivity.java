@@ -19,8 +19,10 @@ package com.google.samples.dataprivacy.page.images;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +34,7 @@ import com.google.samples.dataprivacy.page.importimage.ImageImportActivity;
 import com.google.samples.dataprivacy.util.ImageUtils;
 
 import java.io.File;
+import java.io.IOException;
 
 
 public class ImagesActivity extends AppCompatActivity implements PictureTaker, ImageImporter {
@@ -91,9 +94,14 @@ public class ImagesActivity extends AppCompatActivity implements PictureTaker, I
             // Image capture intent result
             onImageCapture(data.getExtras());
 
-        } else if (requestCode == REQUEST_IMAGE_IMPORT && resultCode == Activity.RESULT_OK) {
+        } else if (requestCode == REQUEST_IMAGE_IMPORT
+                && resultCode == Activity.RESULT_OK && data != null) {
             // Image import intent result
-            onImageImport(data.getExtras());
+            // The ACTION_GET_CONTENT Intent returns a URI pointing to the file.
+            // It does not return the file itself. Extract the URI
+            // from the Intent and process it.
+            Uri uri = data.getData();
+            importUriImage(uri);
 
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -130,9 +138,37 @@ public class ImagesActivity extends AppCompatActivity implements PictureTaker, I
 
     @Override
     public void importImage() {
-        // Start an intent to the ImageImportActivity where the user can select an image.
-        Intent intent = new Intent(this, ImageImportActivity.class);
+        // Use an ACTION_GET_CONTENT intent to select a file using the system's
+        // file browser.
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        // Filter files only to those that can be "opened" and directly accessed
+        // as a stream.
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        // Only show images.
+        intent.setType("image/*");
+
         startActivityForResult(intent, REQUEST_IMAGE_IMPORT);
     }
 
+    /**
+     * Uses the {@link MediaStore} content provider to load the {@link Uri}
+     * as a Bitmap.
+     * Next, notifies the presenter to import this image.
+     *
+     * @param uri Points to the image to create.
+     */
+    private void importUriImage(@NonNull Uri uri) {
+        try {
+            // Use the MediaStore to load the image.
+            Bitmap image = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+            if (image != null) {
+                // Tell the presenter to import this image.
+                mPresenter.onImportImage(image);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e(TAG, "Error: " + e.getMessage() + "Could not open URI: "
+                    + uri.toString());
+        }
+    }
 }
