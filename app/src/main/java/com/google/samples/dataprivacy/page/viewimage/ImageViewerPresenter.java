@@ -18,7 +18,7 @@ package com.google.samples.dataprivacy.page.viewimage;
 
 
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.google.samples.dataprivacy.storage.ImagesRepository;
 
