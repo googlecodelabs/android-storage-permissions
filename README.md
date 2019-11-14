@@ -1,3 +1,6 @@
+⚠️ This codelab is deprecated. We recommend you to have a look at our [Storage code samples](https://github.com/android/storage-samples)
+which reflect a better privacy approach with data.
+
 # Keep Sensitive Data Safe and Private Codelab
 
 This repository contains the code for the Android codelab "Keep Sensitive Data
