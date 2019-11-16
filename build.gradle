@@ -18,13 +18,11 @@
 
 buildscript {
     repositories {
+        google()
         jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.5.2'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -33,10 +31,8 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
     }
 }
 
@@ -48,12 +44,11 @@ task clean(type: Delete) {
 ext {
     // Sdk and tools
     minSdkVersion = 19
-    targetSdkVersion = 27
-    compileSdkVersion = 27
-    buildToolsVersion = '27.0.3'
+    targetSdkVersion = 29
+    compileSdkVersion = 29
+    buildToolsVersion = '29.0.2'
 
     // App dependencies
-    supportLibraryVersion = '27.1.1'
     junitVersion = '4.12'
     mockitoVersion = '1.10.19'
     powerMockito = '1.7.1'
